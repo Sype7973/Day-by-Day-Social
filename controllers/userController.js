@@ -1,6 +1,6 @@
 // objectId() method for converting user id to object id for querying database
 const {ObjectId} = require('mongoose').Types;
-const {User} = require('../models');
+const {User, Thought} = require('../models');
 
 module.exports = {
 // get all users
@@ -70,7 +70,7 @@ async updateUser(req, res) {
         }
 },
 
-// delete user
+// delete user and thoughts associated with user
 async deleteUser(req, res) {
  try {
     const user = await User.findOneAndDelete({
@@ -82,12 +82,15 @@ async deleteUser(req, res) {
         });
         return;
     }
+    await Thought.deleteMany({
+        username: user.username
+    });
     res.json(user);
- }
-    catch (err) {
-        console.log(err);
-        res.status(500).json(err);
     }
+        catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
 },
 
 // add friend
@@ -121,5 +124,4 @@ async removeFriend (req, res) {
             res.status(500).json(err)
         }
     },
-}
-
+};
