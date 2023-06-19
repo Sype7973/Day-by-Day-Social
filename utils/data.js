@@ -1,0 +1,35 @@
+const names = [
+    'John',
+    'Jane',
+    'Jack',
+    'Jill',
+    'Joe',
+    'Bob',
+    'Bill',
+    'Matt',
+    'Mark',
+    'Mike',
+    'Molly',
+    'Mandy',
+    'Tony',
+    'Tom',
+    'Tim',
+    'Tina',
+    'Adam',
+    'Alex',
+    'Amanda',
+
+];
+
+const username =[
+    'johnny',
+    'jane2',
+    'jack5',
+    'jilly',
+    'joeyboy',
+    'bobby',
+    'billy',
+    'matty',
+    'marko',
+    'mike',
+];

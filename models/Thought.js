@@ -1,5 +1,6 @@
 const {Schema, Types, model} = require('mongoose');
 const dayjs = require('dayjs');
+const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema(
     {
@@ -37,36 +38,6 @@ const thoughtSchema = new Schema(
     }
 );
 
-// reaction schema how do you get the reaction schema to work?
-const reactionSchema = new Schema(
-    {
-        // set custom id to avoid confusion with parent thought's _id field
-        reactionId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
-        reactionBody: {
-            type: String,
-            required: true,
-            maxLength: 280
-        },
-        username: {
-            type: String,
-            required: true
-        },
-        // uses dayjs to format the date on query
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: (createdAtVal) => dayjs(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
-        }
-    },
-    {
-        toJSON: {
-            getters: true
-        }
-    }
-);
 // get total count of reactions on retrieval
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
