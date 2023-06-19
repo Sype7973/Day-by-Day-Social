@@ -83,7 +83,7 @@ async deleteUser(req, res) {
         return;
     }
     await Thought.deleteMany({
-        username: user.username
+        users: req.params.id
     });
     res.json(user);
     }
