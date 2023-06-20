@@ -46,6 +46,13 @@ module.exports = {
             }, {
                 new: true
             });
+            // if no user found, return 404
+            if (!user) {
+                res.status(404).json({
+                    message: 'No user found with this id!'
+                });
+                return;
+            }
             res.json(thought);
             console.log(thought);
         } catch (err) {
