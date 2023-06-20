@@ -21,7 +21,7 @@ module.exports = {
         });
         if (!thought) {
             res.status(404).json({
-                message: 'No user found with this id!'
+                message: 'No Thought found with this id!'
             });
             return;
         }
@@ -36,6 +36,16 @@ module.exports = {
     async createThought(req, res) {
         try {
             const thought = await Thought.create(req.body);
+            // find user by id, add to set for thought: 
+            const user = await User.findOneAndUpdate({
+                _id: req.body.userId
+            }, {
+                $addToSet: {
+                    thoughts: thought._id
+                }
+            }, {
+                new: true
+            });
             res.json(thought);
             console.log(thought);
         } catch (err) {

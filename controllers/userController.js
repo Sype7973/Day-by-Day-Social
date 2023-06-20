@@ -101,7 +101,8 @@ async addFriend (req, res) {
  try {
     const addaFriend = await User.findOneAndUpdate(
         {_id: req.params.id},
-        {$push: {friends: req.body}},
+        // pushes the friend ID; check validation of ID first before pushing
+        {$addToSet: {friends: req.params.friendId}},
         {new: true}
     )
     res.json(addaFriend)
@@ -115,7 +116,7 @@ async removeFriend (req, res) {
         try {
             const removeaFriend = await User.findOneAndUpdate(
                 {_id: req.params.id},
-                {$pull: {friends: req.body}},
+                {$pull: {friends: Req.params.friendId}},
                 {new: true}
             )
             res.json(removeaFriend)
