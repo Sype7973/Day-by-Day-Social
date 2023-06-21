@@ -121,7 +121,7 @@ async addFriend (req, res) {
 async removeFriend (req, res) {
         try {
             const removeaFriend = await User.findOneAndUpdate(
-                {_id: req.params.id},
+                {_id: req.params.friendId},
                 {$pull: {friends: req.params.friendId}},
                 {new: true}
             )
