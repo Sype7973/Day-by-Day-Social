@@ -40,7 +40,8 @@ async getUserById(req, res) {
 async createUser(req, res) {
     try {
         const user = await User.create(req.body);
-        res.json(user);
+        console.log('You have created a user!')
+        res.json(user)
     }
         catch (err) {
             console.log(err);
@@ -70,30 +71,33 @@ async updateUser(req, res) {
         }
 },
 
-// delete user and thoughts associated with user
+// delete user and thoughts associated with user - currently deletes user and all thoughts, but not thoughts associated with user
 async deleteUser(req, res) {
- try {
-    const user = await User.findOneAndDelete({
-        _id: req.params.id
-    });
-    if (!user) {
+    try {
+      const userId = req.params.id;
+  
+      const user = await User.findOneAndDelete({
+        _id: userId
+      });
+  
+      if (!user) {
         res.status(404).json({
-            message: 'No user found with this id!'
+          message: 'No user found with this id!'
         });
         return;
+      }
+  
+      await Thought.deleteMany({
+        users: { $in: [userId] }
+      });
+  
+      console.log('You have deleted this user and their thoughts!');
+      res.json(user);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
     }
-    await Thought.deleteMany({
-        users: req.params.id
-    });
-    console.log('You have deleted this user and their thoughts!');
-    res.json(user);
-    }
-        catch (err) {
-            console.log(err);
-            res.status(500).json(err);
-        }
-},
-
+  },
 // add friend
 async addFriend (req, res) {
  console.log('You are adding a friend!')

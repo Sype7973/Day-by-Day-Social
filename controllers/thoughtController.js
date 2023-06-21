@@ -95,6 +95,7 @@ module.exports = {
                 });
                 return;
             }
+            console.log('thought deleted')
             res.json(thought);
         } catch (err) {
             console.log(err);
@@ -106,10 +107,10 @@ module.exports = {
     async addReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate({
-                _id: req.params.id
+                _id: req.params.thoughtId
             }, {
                 $addToSet: {
-                    reactions: req.body
+                    reactions: req.params.reactionId
                 }
             }, {
                 runValidators: true,
