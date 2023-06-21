@@ -107,6 +107,7 @@ async addFriend (req, res) {
     const addaFriend = await User.findOneAndUpdate(
         {_id: req.params.id},
         // pushes the friend ID; check validation of ID first before pushing
+        {$push: {friends: req.params.friendId}},
         {$addToSet: {friends: req.params.friendId}},
         {new: true}
     )

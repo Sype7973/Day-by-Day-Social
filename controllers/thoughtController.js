@@ -83,7 +83,7 @@ module.exports = {
     }
     },
 
-    // delete thought
+    // delete thought - currently does not delete the thought from the get users request and keeps the thought id in the user thoughts array
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndDelete({
@@ -103,15 +103,21 @@ module.exports = {
         }
     },
 
-    // add reaction
+    // add reaction, push to reactions array in thought
     async addReaction(req, res) {
         try {
+            // find thought by id, add to set for reaction:
             const thought = await Thought.findOneAndUpdate({
                 _id: req.params.thoughtId
             }, {
                 $addToSet: {
                     reactions: req.params.reactionId
                 }
+            }, {
+                $push: {
+                    reactions: req.body
+                }
+
             }, {
                 runValidators: true,
                 new: true
