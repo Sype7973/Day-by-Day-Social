@@ -98,7 +98,7 @@ async deleteUser(req, res) {
       res.status(500).json(err);
     }
   },
-// add friend
+// add friend - currently does not add friend or push friend ID to friends array
 async addFriend (req, res) {
  console.log('You are adding a friend!')
  console.log(req.body)
