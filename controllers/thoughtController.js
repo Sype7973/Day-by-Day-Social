@@ -117,7 +117,7 @@ module.exports = {
             });
             if (!thought) {
                 res.status(404).json({
-                    message: 'No user found with this id!'
+                    message: 'Sorry, that thought was not found!'
                 });
                 return;
             }

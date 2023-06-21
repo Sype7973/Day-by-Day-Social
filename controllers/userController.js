@@ -85,6 +85,7 @@ async deleteUser(req, res) {
     await Thought.deleteMany({
         users: req.params.id
     });
+    console.log('You have deleted this user and their thoughts!');
     res.json(user);
     }
         catch (err) {
