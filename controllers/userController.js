@@ -107,7 +107,9 @@ async addFriend(req, res) {
 
     const addFriend = await User.findOneAndUpdate(
       { _id: id },
-      { $addToSet: { friends: friendId } },
+      { $addToSet: { friends: friendId }, $inc: { friendCount: 1 } },
+        $push: { friends: friendId }},
+      
       { new: true }
     );
 
