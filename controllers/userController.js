@@ -74,24 +74,22 @@ async updateUser(req, res) {
 // delete user and thoughts associated with user - currently deletes user and all thoughts, but not thoughts associated with user
 async deleteUser(req, res) {
   try {
-
-    const userData = await User.findOne({ _id: req.params.userId });
-    console.log(userData.thoughts)
-
     const user = await User.findOneAndRemove({ _id: req.params.userId });
 
     if (!user) {
       return res.status(404).json({ message: 'No such user exists' });
     }
 
-    await Thought.deleteMany({ _id: { $in: userData.thoughts } });
+    if (user.thoughts && user.thoughts.length > 0) {
+      await Thought.deleteMany({ _id: { $in: user.thoughts } });
+    }
 
     await User.updateMany(
       { friends: { $in: req.params.userId } },
       { $pull: { friends: req.params.userId } }
     );
 
-    res.json({ message: 'User and associated thoughts successfully deleted'})
+    res.json({ message: 'User and associated thoughts successfully deleted' });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
