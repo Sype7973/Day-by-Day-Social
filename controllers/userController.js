@@ -103,13 +103,11 @@ async addFriend (req, res) {
  console.log(req.body)
 
  try {
-    const addaFriend = await User.findOneAndUpdate(
-        {_id: req.params.id},
-        // pushes the friend ID; check validation of ID first before pushing
-        {$push: {friends: req.params.friendId}},
-        {$addToSet: {friends: req.params.friendId}},
-        {new: true}
-    )
+  const addaFriend = await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { $addToSet: { friends: req.params.friendId } },
+    { new: true }
+  );
     res.json(addaFriend)
     } catch (err) {
         res.status(500).json(err)
