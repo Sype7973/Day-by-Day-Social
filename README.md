@@ -16,7 +16,7 @@
 
 - To use this application you will need to run npm install to install the dependencies. You will also need to run npm start to start the server. You can then use Insomnia Core or Postman to test the routes.
 
-    ![alt text](assets/images/screenshot.png)
+![alt text](/img/screencap.PNG)
 
 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
 
