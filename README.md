@@ -12,6 +12,9 @@
 
 - To install this application you will need to clone the repository to your local machine. You will also need to install node.js and mongoDB.
 
+Github Url:
+https://github.com/Sype7973/Day-by-Day-Social
+
 ## Usage
 
 - To use this application you will need to run npm install to install the dependencies. You will also need to run npm start to start the server. You can then use Insomnia Core or Postman to test the routes.
