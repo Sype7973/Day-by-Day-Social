@@ -73,31 +73,30 @@ async updateUser(req, res) {
 
 // delete user and thoughts associated with user - currently deletes user and all thoughts, but not thoughts associated with user
 async deleteUser(req, res) {
-    try {
-      const userId = req.params.id;
-  
-      const user = await User.findOneAndDelete({
-        _id: userId
-      });
-  
-      if (!user) {
-        res.status(404).json({
-          message: 'No user found with this id!'
-        });
-        return;
-      }
-  
-      await Thought.deleteMany({
-        users: { $in: [userId] }
-      });
-  
-      console.log('You have deleted this user and their thoughts!');
-      res.json(user);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+  try {
+
+    const userData = await User.findOne({ _id: req.params.userId });
+    console.log(userData.thoughts)
+
+    const user = await User.findOneAndRemove({ _id: req.params.userId });
+
+    if (!user) {
+      return res.status(404).json({ message: 'No such user exists' });
     }
-  },
+
+    await Thought.deleteMany({ _id: { $in: userData.thoughts } });
+
+    await User.updateMany(
+      { friends: { $in: req.params.userId } },
+      { $pull: { friends: req.params.userId } }
+    );
+
+    res.json({ message: 'User and associated thoughts successfully deleted'})
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+},
 // add friend - currently does not add friend or push friend ID to friends array
 async addFriend (req, res) {
  console.log('You are adding a friend!')
