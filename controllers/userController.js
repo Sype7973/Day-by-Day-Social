@@ -124,7 +124,7 @@ async removeFriend (req, res) {
                 {$pull: {friends: req.params.friendId}},
                 {new: true}
             )
-            res.json(removeaFriend)
+            res.json({message: 'Friend successfully removed!'})
         }
         catch (err) {
             res.status(500).json(err)
