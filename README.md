@@ -2,27 +2,21 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+- My motivation for building this application was to utilise mongoDB and mongoose to create a social media application that allows users to post their thoughts and react to other users thoughts.
+- I built this project to learn more about mongoDB and mongoose. I also wanted to learn more about relationships between models and how to use them.
+- This application allows users to create an account, post their thoughts, react to other users thoughts and add other users as friends. It is an API application so it is not deployed to a live server. It can be used with Insomnia Core or Postman.
+- I learn't a lot more about mongoDB and mongoose, I learn't how it differs from MySQL and Sequelize. I also learn't how to use relationships between models and how to use them to create a more complex application.
 
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+- To install this application you will need to clone the repository to your local machine. You will also need to install node.js and mongoDB.
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+- To use this application you will need to run npm install to install the dependencies. You will also need to run npm start to start the server. You can then use Insomnia Core or Postman to test the routes.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
     ![alt text](assets/images/screenshot.png)
-    ```
 
 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
 
