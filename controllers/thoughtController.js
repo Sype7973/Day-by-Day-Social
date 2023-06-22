@@ -17,7 +17,7 @@ module.exports = {
     async getThoughtById(req, res) {
     try {
         const thought = await Thought.findOne({
-            _id: req.params.id
+            _id: req.params.thoughtId
         });
         if (!thought) {
             res.status(404).json({
@@ -65,7 +65,7 @@ module.exports = {
     async updateThought(req, res) {
     try {
         const thought = await Thought.findOneAndUpdate({
-            _id: req.params.id
+            _id: req.params.thoughtId
         }, req.body, {
             new: true,
             runValidators: true
@@ -87,7 +87,7 @@ module.exports = {
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndDelete({
-                _id: req.params.id
+                _id: req.params.thoughtId
             });
             if (!thought) {
                 res.status(404).json({
@@ -131,7 +131,7 @@ module.exports = {
     async removeReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate({
-                _id: req.params.id
+                _id: req.params.thoughtId
             }, {
                 $pull: {
                     reactions: {
@@ -144,7 +144,7 @@ module.exports = {
             });
             if (!thought) {
                 res.status(404).json({
-                    message: 'No user found with this id!'
+                    message: 'Sorry, no reaction found with this Id'
                 });
                 return;
             }

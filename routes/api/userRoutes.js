@@ -12,7 +12,7 @@ const {
 // to get to this route, use: localhost:8080/api/users
 router.route('/').get(getAllUsers).post(createUser);
 // to get to this route, use: localhost:8080/api/users/:id
-router.route('/:id').get(getUserById).put(updateUser).delete(deleteUser);
+router.route('/:userId').get(getUserById).put(updateUser).delete(deleteUser);
 // use a user id, add a friend using the friend id
 // to get to this route, use: localhost:8080/api/users/:userId/friends/:friendId
 router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
