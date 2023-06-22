@@ -106,34 +106,26 @@ module.exports = {
     // add reaction, push to reactions array in thought
     async addReaction(req, res) {
         try {
-            // find thought by id, add to set for reaction:
-            const thought = await Thought.findOneAndUpdate({
-                _id: req.params.thoughtId
-            }, {
-                $addToSet: {
-                    reactions: req.params.reactionId
-                }
-            }, {
-                $push: {
-                    reactions: req.body
-                }
-
-            }, {
-                runValidators: true,
-                new: true
-            });
-            if (!thought) {
-                res.status(404).json({
-                    message: 'Sorry, that thought was not found!'
-                });
-                return;
-            }
-            res.json(thought);
+          const thought = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            {
+              $addToSet: { reactions: req.params.reactionId },
+              $push: { reactions: req.body }
+            },
+            { runValidators: true, new: true }
+          );
+      
+          if (!thought) {
+            res.status(404).json({ message: 'Sorry, that thought was not found!' });
+            return;
+          }
+      
+          res.json(thought);
         } catch (err) {
-            console.log(err);
-            res.status(500).json(err);
+          console.log(err);
+          res.status(500).json(err);
         }
-    },
+      },
     
     // remove reaction
     async removeReaction(req, res) {

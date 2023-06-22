@@ -98,20 +98,24 @@ async deleteUser(req, res) {
   }
 },
 // add friend - currently does not add friend or push friend ID to friends array
-async addFriend (req, res) {
- console.log('You are adding a friend!')
- console.log(req.body)
+async addFriend(req, res) {
+  try {
+    console.log('You are adding a friend!');
+    console.log(req.body);
 
- try {
-  const addaFriend = await User.findOneAndUpdate(
-    { _id: req.params.id },
-    { $addToSet: { friends: req.params.friendId } },
-    { new: true }
-  );
-    res.json(addaFriend)
-    } catch (err) {
-        res.status(500).json(err)
- }
+    const { id, friendId } = req.body;
+
+    const addFriend = await User.findOneAndUpdate(
+      { _id: id },
+      { $addToSet: { friends: friendId } },
+      { new: true }
+    );
+
+    res.json(addFriend);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 },
 
 // remove friend
